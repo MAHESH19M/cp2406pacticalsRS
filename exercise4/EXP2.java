@@ -5,7 +5,8 @@ import textio.TextIO;
 public class EXP2 {
     public static void main(String[] args) {
         String input;
-        int output, hexT, i;  // hexT: T for temporary
+        int hexT, i;  // hexT: T for temporary
+        long output;
 
         // Get user unput. lol ooin
         System.out.print("Enter hexa.. value: ");
@@ -13,20 +14,17 @@ public class EXP2 {
 
         // Check if input is a valid hex...and covert to decimal at the same time.
         output = 0;
-        for (i=0; i<input.length(); i++){
-            hexT = hexValue(input.charAt(i));
-            if (hexT == -1) {
-                System.out.println("INCORRECT INPUT: Check your input ******* (get creative, think outside the starts...they are just a place holder ;)  )");  // lol
-                return;
-            } else {
-                output = output*16 + hexValue(input.charAt(i));
+        try {
+            for (i=0; i<input.length(); i++) {
+                hexT = hexValue(input.charAt(i));
+                output = output*16 + hexT;
             }
+
+            // Output.
+            System.out.println("Decimal value: " + output);
+        } catch (IllegalArgumentException e) {
+            System.out.println("INCORRECT INPUT: Check your input you ******* (get creative, think outside the starts...they are just a place holder ;)  )");  // lol
         }
-
-
-        // Output.
-        System.out.println("Decimal value: " + output);
-
     }
 
     public static int hexValue(char ch) {
@@ -47,7 +45,7 @@ public class EXP2 {
             case 'D', 'd' -> {return 13;}
             case 'E', 'e' -> {return 14;}
             case 'F', 'f' -> {return 15;}
-            default -> {return -1;}
+            default -> throw new IllegalArgumentException("Not a legal hexadecimal digit: '" + ch + "'.");
         }
     }
 
