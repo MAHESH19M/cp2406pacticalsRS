@@ -5,31 +5,24 @@ import textio.TextIO;
 public class EXP2 {
     public static void main(String[] args) {
         String input;
-        int output, i;
-        boolean valid;
+        int output, hexT, i;  // hexT: T for temporary
 
         // Get user unput. lol ooin
         System.out.print("Enter hexa.. value: ");
         input = TextIO.getlnWord();
 
-        // Check if input is a valid hex...
-        valid = true;
+        // Check if input is a valid hex...and covert to decimal at the same time.
+        output = 0;
         for (i=0; i<input.length(); i++){
-            if (hexValue(input.charAt(i)) == -1) {
-                valid = false;
-                break;
+            hexT = hexValue(input.charAt(i));
+            if (hexT == -1) {
+                System.out.println("INCORRECT INPUT: Check your input ******* (get creative, think outside the starts...they are just a place holder ;)  )");  // lol
+                return;
+            } else {
+                output = output*16 + hexValue(input.charAt(i));
             }
         }
 
-        // Now the actual conversion. Finally!
-        output = 0;
-        if (valid) {
-            for (i=0; i<input.length(); i++) {
-                output = output*16 + hexValue(input.charAt(i));
-            }
-        } else {
-            System.out.println("INCORRECT INPUT: Check your input dumb ass.");  // That's right. SOUT! it's a short cut or something...
-        }
 
         // Output.
         System.out.println("Decimal value: " + output);
